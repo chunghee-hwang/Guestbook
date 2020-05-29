@@ -7,15 +7,14 @@
 
 <body>
     <h1>방명록</h1>
-    <br> 방명록 전체 수: <span th:text="${count}"></span><br><br>
+    <br> 방명록 전체 수: <th:block th:text="${count}"></th:block><br><br>
     <div th:each="guestbook : ${list}">
-        <span th:text="${guestbook.id }"></span><br>
-        <span th:text="${guestbook.name }"></span><br>
-        <span th:text="${guestbook.content }"></span><br>
-        <span th:text="${guestbook.regdate }"></span><br>
+        <th:block th:text="${guestbook.id }"></th:block><br>
+        <th:block th:text="${guestbook.name }"></th:block><br>
+        <th:block th:text="${guestbook.content }"></th:block><br>
+        <th:block th:text="${guestbook.regdate }"></th:block><br>
     </div>
     <table>
-        <!-- <span th:text="${index + 1}"></span> -->
         <tr>
             <td th:each="pageStart : ${pageStartList}">
                 <a th:href="@{/list(start=${pageStart})}"><th:block th:text="|페이지 ${pageStartStat.index + 1}|"></th:block></a>&nbsp; &nbsp;
