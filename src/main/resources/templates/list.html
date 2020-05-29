@@ -1,0 +1,34 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>방명록 목록</title>
+</head>
+
+<body>
+    <h1>방명록</h1>
+    <br> 방명록 전체 수: <span th:text="${count}"></span><br><br>
+    <div th:each="guestbook : ${list}">
+        <span th:text="${guestbook.id }"></span><br>
+        <span th:text="${guestbook.name }"></span><br>
+        <span th:text="${guestbook.content }"></span><br>
+        <span th:text="${guestbook.regdate }"></span><br>
+    </div>
+    <table>
+        <!-- <span th:text="${index + 1}"></span> -->
+        <tr>
+            <td th:each="pageStart : ${pageStartList}">
+                <a th:href="@{/list(start=${pageStart})}"><th:block th:text="|페이지 ${pageStartStat.index + 1}|"></th:block></a>&nbsp; &nbsp;
+            </td>
+        </tr>
+    </table>
+
+    <br>
+    <form method="post" action="write">
+        이름 : <input type="text" name="name" placeholder="이름 입력" required><br>
+        <textarea name="content" cols="60" rows="6" placeholder="내용 입력" required></textarea>
+        <br> <input type="submit" value="등록">
+    </form>
+</body>
+
+</html>
