@@ -2,11 +2,11 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <title>방명록 목록</title>
+    <title>방명록 목록(Controller Test)</title>
 </head>
 
 <body>
-    <h1>방명록</h1>
+    <h1>방명록(Controller Test)</h1>
     <br> 방명록 전체 수: <th:block th:text="${count}"></th:block><br><br>
     <div th:each="guestbook : ${list}">
         <th:block th:text="${guestbook.id }"></th:block><br>
@@ -27,7 +27,8 @@
         이름 : <input type="text" name="name" placeholder="이름 입력" required><br>
         <textarea name="content" cols="60" rows="6" placeholder="내용 입력" required></textarea>
         <br> <input type="submit" value="등록">
-    </form>
+    </form><br>
+    <a type="button" href="/list2">RestController 테스트 화면으로 이동</a>
 </body>
 
 </html>

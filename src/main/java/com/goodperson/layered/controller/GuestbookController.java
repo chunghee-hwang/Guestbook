@@ -39,6 +39,11 @@ public class GuestbookController {
         return "list";
     }
 
+    @GetMapping(path = "list2")
+    public String list2(@RequestParam(required = false, defaultValue = "0") int start, Model model) {
+        return "list2";
+    }
+
     @PostMapping("/write")
     public String write(@ModelAttribute Guestbook guestbook, 
     HttpServletRequest request){
