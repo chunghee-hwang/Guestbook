@@ -11,4 +11,8 @@ view는 Server side rendering을 이용하는 thymeleaf를 이용했습니다.<b
 
 ## 스크린샷
 
-<img src="./screenshot.png" alt="스크린샷"></img>
+### Controller를 이용한 결과 사진
+<img src="./screenshot/controller_screenshot.png" alt="Controller를 이용한 결과 사진"></img>
+
+### RestController를 이용한 결과 사진
+<img src="./screenshot/restcontroller_screenshot.png" alt="RestController를 이용한 결과 사진"></img>
