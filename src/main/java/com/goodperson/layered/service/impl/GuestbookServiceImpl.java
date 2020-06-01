@@ -15,8 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class GuestbookServiceImpl implements GuestbookService {
-
+public class GuestbookServiceImpl implements GuestbookService
+{
     @Autowired
     GuestbookDao guestbookDao;
 
@@ -24,7 +24,7 @@ public class GuestbookServiceImpl implements GuestbookService {
     LogDao logDao;
 
     @Override
-    @Transactional(readOnly=false)
+    @Transactional(readOnly = false)
     public Guestbook addGuestbook(Guestbook guestbook, String ip) {
         guestbook.setRegdate(new Date());
         long insertedId = guestbookDao.insert(guestbook);
@@ -34,7 +34,7 @@ public class GuestbookServiceImpl implements GuestbookService {
     }
 
     @Override
-    @Transactional(readOnly=false)
+    @Transactional(readOnly = false)
     public int deleteGuestbook(long id, String ip) {
         int deleteCount = guestbookDao.deleteById(id);
         addLog(ip, "delete");
@@ -50,8 +50,8 @@ public class GuestbookServiceImpl implements GuestbookService {
     public List<Guestbook> getGuestbooks(int start) {
         return guestbookDao.selectAll(start, LIMIT);
     }
-    
-    private void addLog(String ip, String method){
+
+    private void addLog(String ip, String method) {
         Log log = new Log();
         log.setIp(ip);
         log.setMethod(method);
@@ -59,10 +59,9 @@ public class GuestbookServiceImpl implements GuestbookService {
         logDao.insert(log);
     }
 
-
     // 페이징을 위한 인덱스 가져오기. ex) /list?start=0, /list?start=5 즉, 0, 5 리스트를 가져옴
     @Override
-    public List<Integer> getPageStartList(int guestbookCount){
+    public List<Integer> getPageStartList(int guestbookCount) {
         int pageCount = guestbookCount / GuestbookService.LIMIT;
         if (guestbookCount % LIMIT > 0)
             pageCount++;
@@ -72,5 +71,6 @@ public class GuestbookServiceImpl implements GuestbookService {
         }
         return pageStartList;
     }
-    
+
+   
 }
