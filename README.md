@@ -13,8 +13,17 @@ view는 Server side rendering을 이용하는 thymeleaf를 이용했습니다.<b
 
 ## 스크린샷
 
-### Controller를 이용한 결과 사진
+### Controller를 이용한 방명록
 <img src="./screenshot/controller_screenshot.png" alt="Controller를 이용한 결과 사진"></img>
 
-### RestController를 이용한 결과 사진
+### RestController를 이용한 방명록
 <img src="./screenshot/restcontroller_screenshot.png" alt="RestController를 이용한 결과 사진"></img>
+
+### 쿠키를 이용한 재방문 여부 확인
+#### 첫 방문 시
+<img src="./screenshot/visitfirst.png" alt="첫 방문시"></img><br>
+쿠키의 value가 false인 이유는 첫 방문시 true였던 값을 먼저 model에 attribute로 추가한 뒤,<br>
+쿠키의 value를 false로 바꿔서 재전송하기 때문이다.
+
+#### 재방문시 
+<img src="./screenshot/visitagain.png" alt="재방문시"></img>

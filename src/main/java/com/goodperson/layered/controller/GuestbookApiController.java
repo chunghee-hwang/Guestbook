@@ -30,19 +30,12 @@ public class GuestbookApiController {
     @GetMapping
     public Map<String, Object> getGuestbookList(@RequestParam(required = false, defaultValue = "0") int start) {
         List<Guestbook> list = guestbookService.getGuestbooks(start);
-        int count = guestbookService.getCount();
-        int pageCount = count / GuestbookService.LIMIT;
-        if (count % GuestbookService.LIMIT > 0) {
-            pageCount++;
-        }
-
-        List<Integer> pageStartList = new ArrayList<>();
-        for (int i = 0; i < pageCount; i++)
-            pageStartList.add(i * GuestbookService.LIMIT);
+        int guestbookCount = guestbookService.getCount();
+        List<Integer> pageStartList = guestbookService.getPageStartList(guestbookCount);
 
         Map<String, Object> map = new HashMap<>();
         map.put("list", list);
-        map.put("count", count);
+        map.put("count", guestbookCount);
         map.put("pageStartList", pageStartList);
 
         return map;

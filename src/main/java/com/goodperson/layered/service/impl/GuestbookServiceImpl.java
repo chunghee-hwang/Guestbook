@@ -1,5 +1,6 @@
 package com.goodperson.layered.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -57,4 +58,19 @@ public class GuestbookServiceImpl implements GuestbookService {
         log.setRegdate(new Date());
         logDao.insert(log);
     }
+
+
+    // 페이징을 위한 인덱스 가져오기. ex) /list?start=0, /list?start=5 즉, 0, 5 리스트를 가져옴
+    @Override
+    public List<Integer> getPageStartList(int guestbookCount){
+        int pageCount = guestbookCount / GuestbookService.LIMIT;
+        if (guestbookCount % LIMIT > 0)
+            pageCount++;
+        List<Integer> pageStartList = new ArrayList<>();
+        for (int i = 0; i < pageCount; i++) {
+            pageStartList.add(i * GuestbookService.LIMIT);
+        }
+        return pageStartList;
+    }
+    
 }

@@ -7,7 +7,14 @@
 
 <body>
     <h1>방명록(Controller Test)</h1>
+    <!-- 쿠키를 이용해서 사용자가 처음 방문했는지 아닌지 판단. -->
+    <h2 th:switch="${firstVisit}">
+        <th:block th:case="${true}">처음 방문하셨군요. 환영합니다!</th:block>
+        <th:block th:case="${false}">또 오셨군요. 환영합니다!</th:block>
+    </h2>
+
     <br> 방명록 전체 수: <th:block th:text="${count}"></th:block><br><br>
+    
     <div th:each="guestbook : ${list}">
         <th:block th:text="${guestbook.id }"></th:block><br>
         <th:block th:text="${guestbook.name }"></th:block><br>
