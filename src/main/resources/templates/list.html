@@ -13,18 +13,25 @@
         <th:block th:case="${false}">또 오셨군요. 환영합니다!</th:block>
     </h2>
 
+
+
     <br> 방명록 전체 수: <th:block th:text="${count}"></th:block><br><br>
-    
+
     <div th:each="guestbook : ${list}">
         <th:block th:text="${guestbook.id }"></th:block><br>
         <th:block th:text="${guestbook.name }"></th:block><br>
         <th:block th:text="${guestbook.content }"></th:block><br>
         <th:block th:text="${guestbook.regdate }"></th:block><br>
+        <th:block th:if="${session.isAdmin}">
+            <a th:href="@{/delete(id=${guestbook.id})}">삭제</a>
+        </th:block>
     </div>
     <table>
         <tr>
             <td th:each="pageStart : ${pageStartList}">
-                <a th:href="@{/list(start=${pageStart})}"><th:block th:text="|페이지 ${pageStartStat.index + 1}|"></th:block></a>&nbsp; &nbsp;
+                <a th:href="@{/list(start=${pageStart})}">
+                    <th:block th:text="|페이지 ${pageStartStat.index + 1}|"></th:block>
+                </a>&nbsp; &nbsp;
             </td>
         </tr>
     </table>
@@ -35,7 +42,11 @@
         <textarea name="content" cols="60" rows="6" placeholder="내용 입력" required></textarea>
         <br> <input type="submit" value="등록">
     </form><br>
-    <a type="button" href="/list2">RestController 테스트 화면으로 이동</a>
+    <a type="button" href="/list2">RestController 테스트 화면으로 이동</a><br>
+
+    <a th:if="${session.isAdmin}" href="/logout">로그아웃</a><br>
+    <a th:unless="${session.isAdmin}" href="/loginform">로그인</a><br>
+
 </body>
 
 </html>

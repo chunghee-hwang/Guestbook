@@ -17,21 +17,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class GuestbookController {
     @Autowired
     private GuestbookService guestbookService;
-    
+
     @Autowired
     private StateService stateService;
 
     @GetMapping(path = "list")
-    public String list(@RequestParam(required = false, defaultValue = "0") int start, 
-                        Model model,
-                        @CookieValue(name="firstVisit", defaultValue = "true",required = true) String firstVisit, 
-                        HttpServletResponse response) 
-    {
+    public String list(@RequestParam(required = false, defaultValue = "0") int start, Model model,
+            @CookieValue(name = "firstVisit", defaultValue = "true", required = true) String firstVisit,
+            HttpServletResponse response) {
         List<Guestbook> list = guestbookService.getGuestbooks(start);
         int guestbookCount = guestbookService.getCount();
         List<Integer> pageStartList = guestbookService.getPageStartList(guestbookCount);
@@ -43,21 +43,30 @@ public class GuestbookController {
         return "list";
     }
 
-
-
-   
-
     @GetMapping(path = "list2")
     public String list2() {
         return "list2";
     }
 
-    //방명록 작성 함수
+    // 방명록 작성 함수
     @PostMapping("/write")
     public String write(@ModelAttribute Guestbook guestbook, HttpServletRequest request) {
         String clientIp = request.getRemoteAddr();
         System.out.println("clientIp: " + clientIp);
         guestbookService.addGuestbook(guestbook, clientIp);
+        return "redirect:list";
+    }
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam(required = true) long id, @SessionAttribute("isAdmin") String isAdmin,
+            HttpServletRequest request, RedirectAttributes redirectAttr) {
+        if (isAdmin == null || !"true".equals(isAdmin)) {
+            redirectAttr.addFlashAttribute("errorMessage", "로그인을 하지 않았습니다.");
+            return "redirect:loginform";
+        }
+        String clientIp = request.getRemoteAddr();
+        System.out.println("clientIp: " + clientIp);
+        guestbookService.deleteGuestbook(id, clientIp);
         return "redirect:list";
     }
 }

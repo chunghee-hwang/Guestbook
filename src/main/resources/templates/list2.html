@@ -8,6 +8,7 @@
 <body>
     <h1>방명록(RestController Test)</h1>
     <h3 class="loading">Loading...</h3>
+
     <div class="container">
         <h2 class="welcome"></h2>
         <br> 방명록 전체 수: <span class="count"></span><br><br>
@@ -23,8 +24,13 @@
         <textarea name="content" cols="60" rows="6" placeholder="내용 입력"></textarea>
         <br> <input type="submit" value="등록" onclick="addGuestbook(this);">
     </form><br>
-    <a type="button" href="/list">Controller 테스트 화면으로 이동</a>
+    <a type="button" href="/list">Controller 테스트 화면으로 이동</a><br>
+    <a th:if="${session.isAdmin}" href="/logout">로그아웃</a>
+    <a th:unless="${session.isAdmin}" href="/loginform">로그인</a>
+    <input id="isAdmin" type="hidden" th:attr='data-is-admin=${session.isAdmin}'>
     <script src="/js/list2.js"></script>
+
+
 </body>
 
 </html>
