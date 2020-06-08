@@ -22,8 +22,6 @@ getGuestbooks = (start = 0) => {
         }
 
         let isAdmin = document.querySelector("#isAdmin").dataset.isAdmin;
-        console.log("isAdminTag: " + document.querySelector("#isAdmin"));
-        console.log('isAdmin : ' + isAdmin);
         document.querySelector(".count").innerText = json.count
         let listHtml = json.list.reduce((accumulator, guestbook) => {
             accumulator +=

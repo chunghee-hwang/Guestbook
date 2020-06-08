@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.goodperson.layered.argumentresolver.HeaderInfo;
 import com.goodperson.layered.dto.Guestbook;
 import com.goodperson.layered.service.GuestbookService;
 import com.goodperson.layered.service.StateService;
@@ -31,11 +32,15 @@ public class GuestbookController {
     @GetMapping(path = "list")
     public String list(@RequestParam(required = false, defaultValue = "0") int start, Model model,
             @CookieValue(name = "firstVisit", defaultValue = "true", required = true) String firstVisit,
-            HttpServletResponse response) {
+            HttpServletResponse response, HeaderInfo headerInfo/* 아규먼트 리졸버로 등록한 게 이걸 처리 넘겨준다 */
+    ) {
         List<Guestbook> list = guestbookService.getGuestbooks(start);
         int guestbookCount = guestbookService.getCount();
         List<Integer> pageStartList = guestbookService.getPageStartList(guestbookCount);
         boolean isFirstVisit = stateService.getUserIsFirstVisitFromCookieAndResendUpdatedCookie(firstVisit, response);
+        System.out.println("-----------user-agent-------------");
+        System.out.println(headerInfo.get("user-agent"));
+        System.out.println("---------------------------------");
         model.addAttribute("list", list);
         model.addAttribute("count", guestbookCount);
         model.addAttribute("pageStartList", pageStartList);
