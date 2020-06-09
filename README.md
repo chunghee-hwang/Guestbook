@@ -19,8 +19,12 @@ view는 Server side rendering을 이용하는 thymeleaf를 이용했습니다.<b
 ### Controller를 이용한 방명록
 <img src="./screenshot/controller_screenshot.png" alt="Controller를 이용한 결과 사진"></img>
 
+<hr />
+
 ### RestController를 이용한 방명록
 <img src="./screenshot/restcontroller_screenshot.png" alt="RestController를 이용한 결과 사진"></img>
+
+<hr />
 
 ### 쿠키를 이용한 재방문 여부 확인
 #### 첫방문 시
@@ -30,6 +34,8 @@ view는 Server side rendering을 이용하는 thymeleaf를 이용했습니다.<b
 
 #### 재방문 시 
 <img src="./screenshot/visitagain.png" alt="재방문시"></img>
+
+<hr />
 
 ### 쿠키, 세션을 이용한 로그인
 #### 로그인 없이 게시물을 삭제할 수 없다.
