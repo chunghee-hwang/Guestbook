@@ -1,5 +1,5 @@
 package com.goodperson.layered.controller;
-import java.util.Collections;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 @RestController
 @RequestMapping("/guestbooks")
@@ -32,9 +33,9 @@ public class GuestbookApiController {
     private StateService stateService;
 
     @GetMapping
-    public Map<String, Object> getGuestbookList(@RequestParam(required = false, defaultValue = "0") int start, 
-    @CookieValue(name="firstVisit", defaultValue = "true",required = true) String firstVisit, 
-    HttpServletResponse response) {
+    public Map<String, Object> getGuestbookList(@RequestParam(required = false, defaultValue = "0") int start,
+            @CookieValue(name = "firstVisit", defaultValue = "true", required = true) String firstVisit,
+            HttpServletResponse response) {
         List<Guestbook> list = guestbookService.getGuestbooks(start);
         int guestbookCount = guestbookService.getCount();
         List<Integer> pageStartList = guestbookService.getPageStartList(guestbookCount);
@@ -49,16 +50,33 @@ public class GuestbookApiController {
     }
 
     @PostMapping
-    public Guestbook writeGuestbook(@RequestBody Guestbook guestbook, HttpServletRequest request){
-        String clientIp = request.getRemoteAddr();
-        Guestbook resultGuestbook = guestbookService.addGuestbook(guestbook, clientIp);
-        return resultGuestbook;
+    public Guestbook writeGuestbook(@RequestBody Guestbook guestbook, HttpServletRequest request) {
+        if (guestbook != null) {
+            String clientIp = request.getRemoteAddr();
+            guestbook = guestbookService.addGuestbook(guestbook, clientIp);
+        }
+        return guestbook;
     }
 
     @DeleteMapping("/{id}")
-    public Map<String, Boolean> delete(@PathVariable long id, HttpServletRequest request){
-        String clientIp = request.getRemoteAddr();
-        int deleteCount = guestbookService.deleteGuestbook(id, clientIp);
-        return Collections.singletonMap("success", deleteCount > 0);
+    public Map<String, Object> delete(@PathVariable(required = false) Long id, HttpServletRequest request,
+            @SessionAttribute(required = false) String isAdmin) {
+        HashMap<String, Object> map = new HashMap<>();
+
+        if (id == null || isAdmin == null) {
+            map.put("success", false);
+            map.put("msg", "Invalid request");
+        } else {
+            String clientIp = request.getRemoteAddr();
+            int deleteCount = guestbookService.deleteGuestbook(id, clientIp);
+            if (deleteCount <= 0) {
+                map.put("success", false);
+                map.put("msg", "Fail to delete the entry");
+            } else {
+                map.put("success", true);
+                map.put("msg", "Delete done.");
+            }
+        }
+        return map;
     }
 }

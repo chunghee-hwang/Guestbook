@@ -75,7 +75,7 @@ deleteGuestbook = (guest_id) => {
             getGuestbooks(curStart);
         }
         else {
-            alert('삭제 실패!');
+            alert('삭제 실패: ' + json.msg);
             showLoadingText(false);
         }
     })

@@ -13,19 +13,19 @@
         <th:block th:case="${false}">또 오셨군요. 환영합니다!</th:block>
     </h2>
 
-
-
     <br> 방명록 전체 수: <th:block th:text="${count}"></th:block><br><br>
+    <ul>
+        <li th:each="guestbook : ${list}">
+            <th:block th:text="|아이디: ${guestbook.id }|"></th:block><br>
+            <th:block th:text="|작성자: ${guestbook.name }|"></th:block><br>
+            <th:block th:text="|내용: ${guestbook.content }|"></th:block><br>
+            <th:block th:text="|작성일: ${guestbook.regdate }|"></th:block><br>
+            <th:block th:if="${session.isAdmin}">
+                <a th:href="@{/delete(id=${guestbook.id})}">삭제</a>
+            </th:block>
+        </li>
+    </ul>
 
-    <div th:each="guestbook : ${list}">
-        <th:block th:text="${guestbook.id }"></th:block><br>
-        <th:block th:text="${guestbook.name }"></th:block><br>
-        <th:block th:text="${guestbook.content }"></th:block><br>
-        <th:block th:text="${guestbook.regdate }"></th:block><br>
-        <th:block th:if="${session.isAdmin}">
-            <a th:href="@{/delete(id=${guestbook.id})}">삭제</a>
-        </th:block>
-    </div>
     <table>
         <tr>
             <td th:each="pageStart : ${pageStartList}">

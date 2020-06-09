@@ -22,25 +22,24 @@ public class DaoTest {
     private LogDao logDao;
 
     @Test
-    public void guestbookInsertTest(){
+    public void guestbookInsertTest() {
         Guestbook guestbook = new Guestbook();
         guestbook.setName("황충희");
         guestbook.setContent("반갑습니다. 여러분.");
         guestbook.setRegdate(new Date());
-        
+
         long id = guestbookDao.insert(guestbook);
-        System.out.println(id);
         assertTrue(id > 0);
     }
 
     @Test
-    public void logInsertTest(){
+    public void logInsertTest() {
         Log log = new Log();
         log.setIp("127.0.0.1");
         log.setMethod("insert");
         log.setRegdate(new Date());
         long id = logDao.insert(log);
-        
+
         assertTrue(id > 0);
     }
 
