@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>갤러리</title>
+</head>
+
+<body>
+    <h1>갤러리</h1>
+    <ul>
+        <li><a href="/list">방명록1(Controller)로 이동</a></li>
+        <li><a href="/list2">방명록2(RestController)로 이동</a></li>
+    </ul>
+
+    <form method="post" action="upload" enctype="multipart/form-data">
+        파일: <input type="file" name="files" multiple><br>
+        <input type="submit">
+    </form><br>
+    <input id="pictures_info" type="hidden" th:value="${pictures}">
+    <div class="gallery">
+
+    </div>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            getPictures();
+        });
+
+        getPictures = () => {
+            let pictureInfo = document.querySelector("#pictures_info").value;
+            if (pictureInfo) {
+                let pictureNames = pictureInfo.split(',');
+                let imgTags =
+                    pictureNames.reduce((accumulator, pictureName) => {
+                        accumulator += `
+                        <span>
+                            <div>
+                                <img width="200px" src="/download/${pictureName}" alt="${pictureName}"></img>
+                                <button onclick="window.open('/download/${pictureName}', 'Downloading picture..')">다운로드</button>
+                            </div>
+                        </span>
+                    `;
+                        return accumulator;
+                    }, "");
+                document.querySelector(".gallery").innerHTML = imgTags;
+            }
+        }
+    </script>
+</body>
+
+</html>

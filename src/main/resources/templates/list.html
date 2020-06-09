@@ -13,6 +13,13 @@
         <th:block th:case="${false}">또 오셨군요. 환영합니다!</th:block>
     </h2>
 
+    <ul>
+        <li><a href="/list2">방명록2(RestController)로 이동</a></li>
+        <li th:if="${session.isAdmin}"><a href="/logout">로그아웃</a></li>
+        <li th:unless="${session.isAdmin}"><a href="/loginform">관리자 로그인(게시물 삭제 가능)</a></li>
+        <li><a href="/gallery">갤러리로 이동</a></li>
+    </ul>
+
     <br> 방명록 전체 수: <th:block th:text="${count}"></th:block><br><br>
     <ul>
         <li th:each="guestbook : ${list}">
@@ -42,10 +49,7 @@
         <textarea name="content" cols="60" rows="6" placeholder="내용 입력" required></textarea>
         <br> <input type="submit" value="등록">
     </form><br>
-    <a type="button" href="/list2">RestController 테스트 화면으로 이동</a><br>
 
-    <a th:if="${session.isAdmin}" href="/logout">로그아웃</a><br>
-    <a th:unless="${session.isAdmin}" href="/loginform">로그인</a><br>
 
 </body>
 
