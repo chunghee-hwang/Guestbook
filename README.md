@@ -12,7 +12,8 @@ view는 Server side rendering을 이용하는 thymeleaf를 이용했습니다.<b
 * [인터셉터를 이용해 Controller 공통 로직 처리하기](https://www.edwith.org/boostcourse-web/lecture/16805/)
 * [아규먼트 리졸버를 이용해 HTTP Header정보를 Map객체에 담아서 Controller에게 전달하기](https://www.edwith.org/boostcourse-web/lecture/16807/)
 * [slf4j를 이용한 로그남기기](https://www.edwith.org/boostcourse-web/lecture/16815/)
-
+* [파일 업로드 구현하기](https://www.edwith.org/boostcourse-web/lecture/16817/)
+* [파일 다운로드 구현하기](https://www.edwith.org/boostcourse-web/lecture/16818/)
 ## 스크린샷
 
 ### Controller를 이용한 방명록
@@ -29,3 +30,14 @@ view는 Server side rendering을 이용하는 thymeleaf를 이용했습니다.<b
 
 #### 재방문 시 
 <img src="./screenshot/visitagain.png" alt="재방문시"></img>
+
+### 쿠키, 세션을 이용한 로그인
+#### 로그인 없이 게시물을 삭제할 수 없다.
+<img src="./screenshot/logout.png" alt="로그아웃 상태"></img>
+
+#### 로그인이 되어있으면 삭제 버튼이 보인다.
+<img src="./screenshot/login.png" alt="로그아웃 상태"></img>
+
+### 파일 업로드, 다운로드를 이용한 갤러리
+#### 업로드한 사진들을 볼 수 있고 다운로드 할 수 있다.
+<img src="./screenshot/gallery.png" alt="갤러리"></img>
