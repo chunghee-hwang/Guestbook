@@ -36,7 +36,7 @@ public class FileController {
         if (uploadDirectory.exists()) {
             String[] pictures = uploadDirectory.list();
             if (pictures != null) {
-                String joinedPictures = Arrays.stream(uploadDirectory.list()).collect(Collectors.joining(","))
+                String joinedPictures = Arrays.stream(pictures).collect(Collectors.joining(","))
                         .toString();
                 modelAndView.addObject("pictures", joinedPictures);
             }
