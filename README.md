@@ -11,6 +11,8 @@ view는 Server side rendering을 이용하는 thymeleaf를 이용했습니다.<b
 * [Spring MVC에서 Session사용하기](https://www.edwith.org/boostcourse-web/lecture/16803/)
 * [인터셉터를 이용해 Controller 공통 로직 처리하기](https://www.edwith.org/boostcourse-web/lecture/16805/)
 * [아규먼트 리졸버를 이용해 HTTP Header정보를 Map객체에 담아서 Controller에게 전달하기](https://www.edwith.org/boostcourse-web/lecture/16807/)
+* [slf4j를 이용한 로그남기기](https://www.edwith.org/boostcourse-web/lecture/16815/)
+
 ## 스크린샷
 
 ### Controller를 이용한 방명록
