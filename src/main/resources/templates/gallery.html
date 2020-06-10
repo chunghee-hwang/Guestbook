@@ -33,12 +33,10 @@
                 let imgTags =
                     pictureNames.reduce((accumulator, pictureName) => {
                         accumulator += `
-                        <span>
                             <div>
                                 <img width="200px" src="/download/${pictureName}" alt="${pictureName}"></img>
                                 <button onclick="window.open('/download/${pictureName}', 'Downloading picture..')">다운로드</button>
                             </div>
-                        </span>
                     `;
                         return accumulator;
                     }, "");
